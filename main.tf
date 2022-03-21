@@ -46,6 +46,7 @@ resource "google_cloudfunctions_function" "function" {
   entry_point           = var.entry_point
   runtime               = var.runtime
   environment_variables = var.environment_variables
+  service_account_email = var.service_account_email
   vpc_connector         = var.vpc_connector
   max_instances         = var.max_instances
 }
