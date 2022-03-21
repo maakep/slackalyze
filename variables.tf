@@ -1,5 +1,3 @@
-## REQUIRED VARIABLES
-
 variable "bucket_name" {
   type        = string
   description = "Name of GCS bucket to use to store the Cloud Functions their contents on."
@@ -60,10 +58,8 @@ variable "max_instances" {
   default     = 1
 }
 
-# OPTIONAL VARIABLES
-
 variable "environment_variables" {
-  type        = map
+  type        = map(any)
   description = "(Optional) A set of key/value environment variable pairs to assign to the function."
   default     = {}
 }
@@ -79,4 +75,3 @@ variable "vpc_connector" {
   description = "(Optional) If provided, the vpc connector to use"
   default     = null
 }
-
