@@ -1,13 +1,21 @@
+provider "google" {
+  project = var.project_id
+  region  = var.default_region
+  zone    = "europe-west1-b"
+}
+
+
+
 # Zip up source code
 data "archive_file" "function_zip" {
   type        = "zip"
   source_dir  = var.source_dir
-  output_path = "${var.source_dir}/../${var.name}.zip"
+  output_path = "${var.source_dir}/${var.name}.zip"
 }
 
 resource "google_storage_bucket" "function_zip_bucket" {
   name          = var.bucket_name
-  location      = var.default_region
+  location      = "EU"
   force_destroy = true
 
   lifecycle_rule {
@@ -25,6 +33,7 @@ resource "google_storage_bucket_object" "function_zip_bucket_object" {
   name   = "${var.name}.${data.archive_file.function_zip.output_base64sha256}.zip"
   bucket = var.bucket_name
   source = data.archive_file.function_zip.output_path
+  depends_on = [google_storage_bucket.function_zip_bucket]
 }
 
 # Create the cloud function

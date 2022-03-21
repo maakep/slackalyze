@@ -1,3 +1,8 @@
+variable "project_id" {
+  type        = string
+  description = "GCP project id"
+}
+
 variable "bucket_name" {
   type        = string
   description = "Name of GCS bucket to use to store the Cloud Functions their contents on."
@@ -13,7 +18,7 @@ variable "name" {
 variable "default_region" {
   type        = string
   description = "GCP region"
-  default     = "europe-europe-west1"
+  default     = "europe-west1"
 }
 
 variable "source_dir" {
