@@ -5,6 +5,21 @@ data "archive_file" "function_zip" {
   output_path = "${var.source_dir}/../${var.name}.zip"
 }
 
+resource "google_storage_bucket" "function_zip_bucket" {
+  name          = var.bucket_name
+  location      = "EU"
+  force_destroy = true
+
+  lifecycle_rule {
+    condition {
+      age = 1
+    }
+    action {
+      type = "Delete"
+    }
+  }
+}
+
 # Store zipped code in the bucket
 resource "google_storage_bucket_object" "function_zip_bucket_object" {
   name   = "${var.name}.${data.archive_file.function_zip.output_base64sha256}.zip"
