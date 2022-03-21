@@ -21,13 +21,13 @@ variable "default_region" {
 variable "source_dir" {
   type        = string
   description = "Source directory containing the function source files. Its contents will be zipped and uploaded to the given `bucket_name`"
-  default     = "./function/${var.name}"
+  default     = "./function/slackalyze"
 }
 
 variable "description" {
   type        = string
   description = "Description of the function."
-  default     = "${var.name} Slackbot slash command HTTP Cloud Function"
+  default     = "slackalyze Slackbot slash command HTTP Cloud Function"
 }
 
 variable "runtime" {
