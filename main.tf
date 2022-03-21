@@ -8,13 +8,17 @@ provider "google" {
 data "archive_file" "function_zip" {
   type        = "zip"
   source_dir  = var.source_dir
-  output_path = "${var.source_dir}/${var.name}.zip"
+  output_path = "${var.name}.zip"
 }
 
 resource "google_storage_bucket" "function_zip_bucket" {
   name          = var.bucket_name
   location      = "EU"
   force_destroy = true
+
+  versioning {
+    enabled = true
+  }
 
   lifecycle_rule {
     condition {
