@@ -7,7 +7,7 @@ data "archive_file" "function_zip" {
 
 resource "google_storage_bucket" "function_zip_bucket" {
   name          = var.bucket_name
-  location      = "EU"
+  location      = var.default_region
   force_destroy = true
 
   lifecycle_rule {
