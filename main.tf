@@ -4,8 +4,6 @@ provider "google" {
   zone    = "europe-west1-b"
 }
 
-
-
 # Zip up source code
 data "archive_file" "function_zip" {
   type        = "zip"
@@ -30,9 +28,9 @@ resource "google_storage_bucket" "function_zip_bucket" {
 
 # Store zipped code in the bucket
 resource "google_storage_bucket_object" "function_zip_bucket_object" {
-  name   = "${var.name}.${data.archive_file.function_zip.output_base64sha256}.zip"
-  bucket = var.bucket_name
-  source = data.archive_file.function_zip.output_path
+  name       = "${var.name}.${data.archive_file.function_zip.output_base64sha256}.zip"
+  bucket     = var.bucket_name
+  source     = data.archive_file.function_zip.output_path
   depends_on = [google_storage_bucket.function_zip_bucket]
 }
 
@@ -48,7 +46,6 @@ resource "google_cloudfunctions_function" "function" {
   entry_point           = var.entry_point
   runtime               = var.runtime
   environment_variables = var.environment_variables
-  service_account_email = var.service_account_email
   vpc_connector         = var.vpc_connector
   max_instances         = var.max_instances
 }
