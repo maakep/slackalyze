@@ -1,3 +1,10 @@
+terraform {
+  backend "gcs" {
+    bucket  = "tf-state"
+    prefix  = "terraform/state"
+  }
+}
+
 provider "google" {
   project = var.project_id
   region  = var.default_region
