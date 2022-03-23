@@ -9,11 +9,6 @@ variable "bucket_name" {
   default     = "slackalyze-bucket"
 }
 
-variable "backend_bucket_name" {
-  type        = string
-  description = "Terraform state bucket"
-}
-
 variable "name" {
   type        = string
   description = "A user-defined name of the function. Function names must be unique globally."

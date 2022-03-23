@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = var.backend_bucket
+    bucket = "slackalyze-terraform-state-bucket"
     prefix = "slackalyze-terraform"
   }
 }
